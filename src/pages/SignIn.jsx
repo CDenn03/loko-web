@@ -6,6 +6,16 @@ export default function SignIn() {
   const [email,setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  const login = async(e) => {
+    e.preventDefault();
+    if (email === "" || password === "") {
+      return toast.error("Please enter all the details", {
+        position: toast.POSITION.TOP_CENTER,
+      });
+    }
+
+  }
+
   return (
     <>
       <Topbar />
@@ -18,14 +28,10 @@ export default function SignIn() {
                   Enter your login details
                 </div>
                 <hr className='m-4 border-b-1 border-blueGray-300' />
-                <form>
-                    
-                      
-                      <div className='relative w-full mb-3 px-1'>
-                        
+                <form onSubmit={ login }>                     
+                      <div className='relative w-full mb-3 px-1'>         
                         <label
-                          className='block uppercase text-blueGray-600 text-xs font-bold mb-2'
-                          
+                          className='block uppercase text-blueGray-600 text-xs font-bold mb-2'                     
                         >
                           Email
                         </label>
@@ -37,11 +43,13 @@ export default function SignIn() {
                             type='email'
                             className='border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150'
                             placeholder='Email'
-                            
+                            onChange={(e)=> {
+                              e.preventDefault();
+                              setEmail(e.target.value);
+                            }} 
                           />
                         </div>
-
-                        </div>
+                      </div>
                     
 
                     <div className='relative w-full mb-3 mt-2 px-1'>
@@ -59,7 +67,10 @@ export default function SignIn() {
                           type='password'
                           className='border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150'
                           placeholder='Password'
-                          
+                          onChange={(e) => {
+                            e.preventDefault();
+                            setPassword(e.target.value);
+                          }}
                         />
                       </div>
                     </div>
@@ -67,7 +78,8 @@ export default function SignIn() {
                     <div className='text-center m-6'>
                       <button
                         className='bg-[#d7b244] text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150'
-                        type='button'                
+                        type='button'
+                        onClick = {login}                
                       >
                         Sign In
                       </button>
