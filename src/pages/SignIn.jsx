@@ -134,8 +134,8 @@ export default function SignIn() {
     myHeaders.append("Content-Type", "application/json");
 
     var raw = JSON.stringify({
-      email: "isaackariuki108@gmail.com",
-      password: "bhevjfd",
+      email: email,
+      password: password,
     });
 
     var requestOptions = {
