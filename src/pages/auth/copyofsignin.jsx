@@ -1,11 +1,15 @@
 import React, { useState } from "react";
-import Topbar from "../components/Topbar";
+import { Link, useNavigate } from "react-router-dom";
+import Topbar from "../../components/Topbar";
 import { AiOutlineMail, AiOutlineLock } from "react-icons/ai";
+import { toast, ToastContainer } from "react-toastify";
+// import jwt from "jsonwebtoken";
 import axios from "axios";
 
 export default function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   // const login = async (e) => {
   //   e.preventDefault();
@@ -122,6 +126,39 @@ export default function SignIn() {
   //   }
   // };
 
+  // const login = async (e) => {
+  //   e.preventDefault();
+  //   if (email === "" || password === "") {
+  //     return toast.error("Please enter all the details", {
+  //       position: toast.POSITION.TOP_CENTER,
+  //     });
+  //   }
+
+  //   var myHeaders = new Headers();
+  //   myHeaders.append("Content-Type", "application/json");
+
+  //   var raw = JSON.stringify({
+  //     email: email,
+  //     password: password,
+  //   });
+
+  //   var requestOptions = {
+  //     method: "POST",
+  //     headers: myHeaders,
+  //     body: raw,
+  //     redirect: "follow",
+  //   };
+
+  //   await fetch(
+  //     "https://us-central1-loko-202713.cloudfunctions.net/lokoWebLogin/userLogin?apiKey=AIzaSyCu6L1wyt5YAbXYRarKjeszbTp5CQIiiDI",
+  //     requestOptions
+  //   )
+  //     .then((response) => response.text())
+  //     .then((result) => console.log(result))
+  //     .catch((error) => console.log("error", error));
+
+  // };
+
   const login = async (e) => {
     e.preventDefault();
     if (email === "" || password === "") {
@@ -145,13 +182,58 @@ export default function SignIn() {
       redirect: "follow",
     };
 
-    await fetch(
-      "https://us-central1-loko-202713.cloudfunctions.net/lokoWebLogin/userLogin?apiKey=AIzaSyCu6L1wyt5YAbXYRarKjeszbTp5CQIiiDI",
-      requestOptions
-    )
-      .then((response) => response.text())
-      .then((result) => console.log(result))
-      .catch((error) => console.log("error", error));
+    try {
+      const response = await fetch(
+        "https://us-central1-loko-202713.cloudfunctions.net/lokoWebLogin/userLogin?apiKey=AIzaSyCu6L1wyt5YAbXYRarKjeszbTp5CQIiiDI",
+        requestOptions
+      );
+
+      if (response.status === 200) {
+        const result = await response.json();
+        if (result.SUCCESS) {
+          // Password Match, send OTP code to the user's email
+
+          // Create a JWT token and store it
+          // const userToken = jwt.sign(
+          //   { userId: result.userId, email: email }, // Customize the payload as needed
+          //   "rEHe2PicXcA28mC", // Replace with a secure secret key
+          //   { expiresIn: "1h" } // Customize the token expiration time
+          // );
+
+          // // Store the token in a secure location (e.g., cookies or local storage)
+          // localStorage.setItem("userToken", userToken);
+
+          // // Redirect to the dashboard or wherever needed
+          // navigate("/");
+
+          // // You can also set the session state in App.js if necessary
+          // props.setSession({ userId: result.userId, email: email });
+          console.log(result);
+        } else {
+          // Handle other success cases if needed
+        }
+      } else if (response.status === 401) {
+        const errorResult = await response.json();
+        if (errorResult.ERROR === "Unauthorized") {
+          // Unauthorized, show an error message
+          console.log("Unauthorized");
+        } else if (errorResult.ERROR === "Incorrect Password.") {
+          // Incorrect Password, show an error message
+          console.log("Incorrect Password.");
+        } else {
+          // Handle other 401 errors if needed
+        }
+      } else if (response.status === 500) {
+        const errorResult = await response.json();
+        // Internal Server Error, show an error message
+        console.log("Internal Server Error: " + errorResult.ERROR);
+      } else {
+        // Handle other response statuses if needed
+      }
+    } catch (error) {
+      // Handle network or other errors
+      console.log("Error: " + error);
+    }
   };
 
   return (

@@ -1,29 +1,42 @@
-import React, { useState } from 'react'
-import { RiLockPasswordLine } from 'react-icons/ri'
+import React, { useState } from "react";
+import { RiLockPasswordLine } from "react-icons/ri";
+import { ToastContainer } from "react-toastify";
 
 export default function ModalOtp() {
-
   const [otp, setOtp] = useState;
 
-  const verify = async(e) => {
+  const verify = async (e) => {
     e.preventDefault();
-    
-  }
+    if (otp == "") {
+      return toast.error("Please enter the OTP", {
+        position: toast.POSITION.TOP_CENTER,
+      });
+    }
+  };
 
-  const resend = async(e) => {
+  const resend = async (e) => {
     e.preventDefault();
-
-  }
+  };
 
   return (
     <>
+      <ToastContainer />
+      {/* { showModalOTP? (
+        <>
+        
+        </>
+      ): null } */}
       <div class="flex flex-col justify-center content-center items-center w-auto z-50  h-screen p-5">
         <div class="  w-full lg:w-3/5 p-4 rounded-lg bg-[#f2f5f7]">
           <div class=" p-3 rounded-lg relative shadow-lg bg-[#f5fafc] focus:outline-none">
-            <div class="  text-sm mb-2 font-bold text-center py-1">Enter the OTP code you've recieved.</div>
+            <div class="  text-sm mb-2 font-bold text-center py-1">
+              Enter the OTP code you've recieved.
+            </div>
             <form onSubmit={verify}>
               <div class="flex p-3 ">
-                <span class=" bg-slate-100 p-1 align-middle m-1"><RiLockPasswordLine /></span>
+                <span class=" bg-slate-100 p-1 align-middle m-1">
+                  <RiLockPasswordLine />
+                </span>
                 <input
                   type="text"
                   placeholder="OTP Code"
@@ -53,5 +66,5 @@ export default function ModalOtp() {
         </div>
       </div>
     </>
-  )
+  );
 }
