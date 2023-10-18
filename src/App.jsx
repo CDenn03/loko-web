@@ -24,7 +24,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Dashboard />} />
+        <Route path="/" element={session ? <Navigate to="/" /> : <SignIn />} />
         <Route
           path="/signin"
           element={session ? <Navigate to="/" /> : <SignIn />}
