@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Topbar from "../../components/Topbar";
 import { AiOutlineMail, AiOutlineLock } from "react-icons/ai";
 import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 // import jwt from "jsonwebtoken";
 import axios from "axios";
 
