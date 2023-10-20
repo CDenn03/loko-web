@@ -1,41 +1,23 @@
-import React, { useState, useEffect } from "react";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Sidebar from "./components/Sidebar";
 import Dashboard from "./pages/Dashboard";
+import ProductList from "./pages/Products";
+import Profile from "./pages/Profile";
 import SignIn from "./pages/auth/SignIn";
-import Products from "./pages/Products";
 import VerifyOtp from "./pages/auth/VerifyOtp";
 
 function App() {
-  const [session, setSession] = useState(null);
-
-  // Simulate session setup, e.g., using a useEffect
-  useEffect(() => {
-    // You should implement your authentication logic here to set the session.
-    // For this example, let's assume session is set based on authentication.
-    // Replace this with your actual authentication logic.
-    const isAuthenticated = () => {};
-    if (isAuthenticated) {
-      setSession(/* Your session data */);
-    } else {
-      setSession(true);
-    }
-  }, []);
-
   return (
-    <BrowserRouter>
+    <Router>
       <Routes>
-        <Route path="/" element={session ? <Navigate to="/" /> : <SignIn />} />
-        <Route
-          path="/signin"
-          element={session ? <Navigate to="/" /> : <SignIn />}
-        />
+        <Route path="/" element={<Dashboard />} />
+        <Route path="/signin" element={<SignIn />} />
         <Route path="/verify" element={<VerifyOtp />} />
-        <Route
-          path="/products"
-          element={session ? <Products /> : <Navigate to="/signin" />}
-        />
+        <Route path="/products" element={<ProductList />} />
+        <Route path="/profile" element={<Profile />} />
       </Routes>
-    </BrowserRouter>
+    </Router>
   );
 }
 

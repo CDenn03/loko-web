@@ -4,6 +4,7 @@ import Topbar from "../../components/Topbar";
 import { AiOutlineMail, AiOutlineLock } from "react-icons/ai";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useData } from "../../context/DataProvider";
 // import jwt from "jsonwebtoken";
 import axios from "axios";
 
@@ -11,6 +12,7 @@ export default function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const { setID } = useData();
 
   const login = async (e) => {
     e.preventDefault();
@@ -45,9 +47,9 @@ export default function SignIn() {
         const result = await response.json();
         if (result.SUCCESS) {
           console.log(result);
+          const id = result.shopId;
+          setID(id);
           navigate("/verify");
-        } else {
-          // Handle other success cases if needed
         }
       } else if (response.status === 401) {
         const errorResult = await response.json();
@@ -131,7 +133,7 @@ export default function SignIn() {
 
                 <div className="text-center m-6">
                   <button
-                    className="bg-[#d7b244] text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
+                    className="bg-[#d7b244] text-white container mx-auto active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
                     type="button"
                     onClick={login}
                   >
