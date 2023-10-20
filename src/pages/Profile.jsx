@@ -1,11 +1,8 @@
 import React from "react";
 import Topbar from "../components/Topbar";
 import Sidebar from "../components/Sidebar";
-import { useData } from "../../context/DataProvider";
 
 export default function Profile() {
-  const { id } = useData();
-
   return (
     <div className="flex w-full">
       <Topbar />

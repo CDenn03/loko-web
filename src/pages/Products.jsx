@@ -4,7 +4,7 @@ import Sidebar from "../components/Sidebar";
 import { db } from "../config/FirebaseConfig";
 import { collection, query, where, getDocs } from "firebase/firestore";
 import ModalAddProduct from "../components/modal/ModalAddProduct";
-import { useData } from "../../context/DataProvider";
+import { useData } from "../context/DataProvider";
 
 const ProductList = () => {
   const { id } = useData();
