@@ -15,13 +15,13 @@ export default function Sidebar() {
         <li className=" text-white bg-slate-800 rounded-lg">
           <p className=" flex items-center text-lg uppercase font-semibold">
             <AiOutlineTags />
-            <span>Products</span>
+            <span className=" cursor-pointer">Products</span>
           </p>
         </li>
         <li className=" p-2  text-white bg-slate-800 rounded-lg">
           <p className=" flex items-center text-lg uppercase font-semibold">
             <AiOutlineUser />
-            <span>Profile</span>
+            <span className=" cursor-pointer">Profile</span>
           </p>
         </li>
       </ul>
