@@ -1,17 +1,8 @@
-import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
+import { defineConfig } from "vite";
 
-// https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [
-    [react()],
-    [
-      "@firebase/firestore",
-      {
-        config: require("./src/config/firebaseConfig.js"),
-      },
-    ],
-  ],
+  plugins: [react()],
   server: {
     port: 3000,
   },

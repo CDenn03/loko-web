@@ -3,7 +3,7 @@ import { AiOutlineShoppingCart } from "react-icons/ai";
 
 export default function Card() {
   return (
-    <div className=" flex flex-col w-1/4 bg-green-700 rounded-lg mx-2 ">
+    <div className=" flex flex-col  bg-green-700 rounded-lg">
       <div className=" bg-green-500 flex justify-between w-full rounded-t-lg p-3">
         <div>TOTAL ORDERS</div>
         <div>arrow/number</div>

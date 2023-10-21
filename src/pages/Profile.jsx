@@ -1,7 +1,7 @@
 import React from "react";
-import Topbar from "../components/Topbar";
 import Sidebar from "../components/Sidebar";
-import { useData } from "../../context/DataProvider";
+import Topbar from "../components/Topbar";
+import { useData } from "../context/DataProvider";
 
 export default function Profile() {
   const { id } = useData();

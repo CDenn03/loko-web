@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
-import Topbar from "../components/Topbar";
-import Sidebar from "../components/Sidebar";
+import React from "react";
 import Card from "../components/Card";
+import Sidebar from "../components/Sidebar";
+import Topbar from "../components/Topbar";
 
 export default function Dashboard() {
   return (
@@ -14,7 +14,9 @@ export default function Dashboard() {
             <span className="p-4 text-3xl">Dashboard</span>
           </div>
           <div className="">
-            <div className="flex flex-wrap gap-2 p-3 justify-between">
+            <div className="flex flex-wrap gap-4 p-5">
+              <Card />
+              <Card />
               <Card />
               <Card />
               <Card />
