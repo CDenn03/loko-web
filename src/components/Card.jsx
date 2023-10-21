@@ -14,7 +14,7 @@ export default function Card() {
         </div>
         <div className=" text-6xl">00</div>
       </div>
-      <div className=" bg-amber-700 rounded-b-lg p-2 text-white text-sm">
+      <div className=" hover:bg-amber-800 bg-amber-700 rounded-b-lg p-2 text-white text-sm">
         <span className=" hover:cursor-pointer p-1">View more...</span>
       </div>
     </div>

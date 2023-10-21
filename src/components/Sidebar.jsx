@@ -3,25 +3,26 @@ import { AiOutlineHome, AiOutlineTags, AiOutlineUser } from "react-icons/ai";
 
 export default function Sidebar() {
   return (
-    <nav className=" pt-20 w-48   bg-slate-800 text-white h-screen">
-      <ul className="space-y-1 p-1">
-        <span className=" text-sm uppercase font-bold">Navigation</span>
-        <li className="p-2 text-white bg-slate-800 rounded-lg">
+    <nav className=" flex justify-center pt-20  p-3  bg-slate-800 text-white h-screen">
+      <ul className="space-y-1">
+        <span className=" p-4 text-xl uppercase font-bold">Navigation</span>
+        {/* start of components */}
+        <li className=" w-60 cursor-pointer hover:bg-slate-700 p-3 text-white bg-slate-800 rounded-lg">
           <p className=" flex items-center text-lg uppercase font-semibold">
             <AiOutlineHome />
-            <span className=" cursor-pointer">Dashboard</span>
+            <span className=" pl-2">Dashboard</span>
           </p>
         </li>
-        <li className=" text-white bg-slate-800 rounded-lg">
+        <li className=" cursor-pointer hover:bg-slate-700 p-3  text-white bg-slate-800 rounded-lg">
           <p className=" flex items-center text-lg uppercase font-semibold">
             <AiOutlineTags />
-            <span className=" cursor-pointer">Products</span>
+            <span className=" pl-2">Products</span>
           </p>
         </li>
-        <li className=" p-2  text-white bg-slate-800 rounded-lg">
+        <li className=" cursor-pointer hover:bg-slate-700 p-3  text-white bg-slate-800 rounded-lg">
           <p className=" flex items-center text-lg uppercase font-semibold">
             <AiOutlineUser />
-            <span className=" cursor-pointer">Profile</span>
+            <span className=" pl-2 ">Profile</span>
           </p>
         </li>
       </ul>
