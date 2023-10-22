@@ -36,21 +36,20 @@ const ProductList = () => {
     <div className="flex w-full">
       <Topbar />
       <Sidebar />
-      <div className="w-full">
-        <div className="pt-24 py-4 bg-yellow-50 w-full">
-          <span className="p-4 text-3xl">Products List</span>
+      <div className=" bg-slate-100 w-screen">
+        <div className="pt-24 py-4">
+          <span className="p-4 font-bold text-3xl">Products List</span>
           <div className="text-right pr-4">
             <button
               onClick={() => setshowModalAddProducts(true)}
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+              className="bg-amber-600 hover:bg-amber-700 text-white font-bold py-2 px-4 rounded"
             >
               Add Product
             </button>
           </div>
         </div>
-
-        <div className="container mx-auto p-4 bg-orange-600">
-          <h1 className="text-2xl font-semibold mb-4">Product List</h1>
+        {/* <h1 className="text-2xl  font-bold mb-4">Product List</h1> */}
+        <div className="container shadow-lg mx-auto p-4 bg-white">
           <table className="w-full">
             <thead>
               <tr>
