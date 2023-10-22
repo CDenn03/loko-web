@@ -36,13 +36,13 @@ const ProductList = () => {
     <div className="flex w-full">
       <Topbar />
       <Sidebar />
-      <div className="w-full bg-[#EAEDDB] p-4 ">
-        <div className="pt-24 py-4  w-full">
-          <span className="p-4 text-3xl">Products List</span>
+      <div className=" bg-slate-100 w-screen">
+        <div className="pt-24 py-4">
+          <span className="p-4 font-bold text-3xl">Products List</span>
           <div className="text-right pr-4">
             <button
               onClick={() => setshowModalAddProducts(true)}
-              className="bg-[#d7b244] text-white mx-auto active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+              className="bg-amber-600 hover:bg-amber-700 text-white font-bold py-2 px-4 rounded"
             >
               Add Product
             </button>
