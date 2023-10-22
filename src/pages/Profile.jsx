@@ -4,8 +4,6 @@ import Topbar from "../components/Topbar";
 import { useData } from "../context/DataProvider";
 
 export default function Profile() {
-  const { id } = useData();
-
   return (
     <div className="flex w-full">
       <Topbar />
