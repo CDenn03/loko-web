@@ -9,7 +9,7 @@ export default function Dashboard() {
       <div className="flex w-full">
         <Topbar />
         <Sidebar />
-        <div className="w-full  bg-slate-100 ">
+        <div className="w-full  bg-[#EAEDDB] ">
           <div className="pt-24 py-4 w-full">
             <span className="p-4 text-3xl">Dashboard</span>
           </div>

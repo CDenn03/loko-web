@@ -53,17 +53,9 @@ const ModalAddProduct = ({
   };
 
   return (
-    <div>
-      <button
-        onClick={() => {
-          setshowModalAddProducts(true);
-        }}
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-      >
-        Add Product
-      </button>
+    <div className="">
       {showModalAddProducts ? (
-        <div className="fixed inset-0 flex items-center justify-center z-50">
+        <div className="fixed inset-0 flex items-center justify-center z-50 h-screen">
           <div className="modal-bg fixed inset-0 bg-black opacity-50"></div>
           <div className="modal relative bg-white p-4 rounded-lg shadow-lg w-96">
             <span
@@ -85,7 +77,7 @@ const ModalAddProduct = ({
                   name="name"
                   value={productData.name}
                   onChange={handleInputChange}
-                  className="form-input mt-1 block w-full"
+                  className="form-input border border-gray-300 rounded p-2 mt-1 block w-full"
                 />
               </div>
 
@@ -98,7 +90,7 @@ const ModalAddProduct = ({
                   name="buyingPrice"
                   value={productData.buyingPrice}
                   onChange={handleInputChange}
-                  className="form-input mt-1 block w-full"
+                  className="form-input border border-gray-300 rounded p-2 mt-1 block w-full"
                 />
               </div>
 
@@ -111,7 +103,7 @@ const ModalAddProduct = ({
                   name="sellingPrice"
                   value={productData.sellingPrice}
                   onChange={handleInputChange}
-                  className="form-input mt-1 block w-full"
+                  className="form-input border border-gray-300 rounded p-2 mt-1 block w-full"
                 />
               </div>
 
@@ -124,7 +116,7 @@ const ModalAddProduct = ({
                   name="quantity"
                   value={productData.quantity}
                   onChange={handleInputChange}
-                  className="form-input mt-1 block w-full"
+                  className="form-input border border-gray-300 rounded p-2 mt-1 block w-full"
                 />
               </div>
 
@@ -137,7 +129,7 @@ const ModalAddProduct = ({
                   name="category"
                   value={productData.category}
                   onChange={handleInputChange}
-                  className="form-input mt-1 block w-full"
+                  className="form-textarea border border-gray-300 rounded p-2 mt-1 block w-full"
                 />
               </div>
 
@@ -149,7 +141,7 @@ const ModalAddProduct = ({
                   name="description"
                   value={productData.description}
                   onChange={handleInputChange}
-                  className="form-textarea mt-1 block w-full"
+                  className="form-input border border-gray-300 rounded p-2 mt-1 block w-full"
                 />
               </div>
 

@@ -36,20 +36,20 @@ const ProductList = () => {
     <div className="flex w-full">
       <Topbar />
       <Sidebar />
-      <div className="w-full">
-        <div className="pt-24 py-4 bg-yellow-50 w-full">
+      <div className="w-full bg-[#EAEDDB] p-4 ">
+        <div className="pt-24 py-4  w-full">
           <span className="p-4 text-3xl">Products List</span>
           <div className="text-right pr-4">
             <button
               onClick={() => setshowModalAddProducts(true)}
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+              className="bg-[#d7b244] text-white mx-auto active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
             >
               Add Product
             </button>
           </div>
         </div>
 
-        <div className="container mx-auto p-4 bg-orange-600">
+        <div className="container mx-auto p-4 bg-[#ece3b6]">
           <h1 className="text-2xl font-semibold mb-4">Product List</h1>
           <table className="w-full">
             <thead>
@@ -58,15 +58,62 @@ const ProductList = () => {
                 <th>Quantity</th>
                 <th>Buying Price</th>
                 <th>Selling Price</th>
+                <th>Action</th>
               </tr>
             </thead>
             <tbody>
+              <tr>
+                <td className=" p-1 w-1/5">
+                  <div className="border rounded-lg">One</div>
+                </td>
+                <td className=" p-1 w-1/5">
+                  <div className="border rounded-lg">Two</div>
+                </td>
+                <td className=" p-1 w-1/5">
+                  <div className="border rounded-lg">Three</div>
+                </td>
+                <td className=" p-1 w-1/5">
+                  <div className="border rounded-lg">Four</div>
+                </td>
+                <td className=" p-1 w-1/5">
+                  <div className="flex px-10 justify-center ">
+                    <button
+                      onClick={() => handleEditProduct(product.id)} // Define the edit action
+                      className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mr-2"
+                    >
+                      Edit
+                    </button>
+                    <button
+                      onClick={() => handleDeleteProduct(product.id)} // Define the delete action
+                      className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                    >
+                      Delete
+                    </button>
+                  </div>
+                </td>
+                <hr className="m-4 border-b-1 border-green-900  " />
+              </tr>
+
               {products.map((product) => (
                 <tr key={product.id}>
-                  <td>{product.name}</td>
-                  <td>{product.prodStock}</td>
-                  <td>{product.prodBuying}</td>
-                  <td>{product.prodSelling}</td>
+                  <td className="border rounded p-2">{product.name}</td>
+                  <td className="border rounded p-2">{product.prodStock}</td>
+                  <td className="border rounded p-2">{product.prodBuying}</td>
+                  <td className="border rounded p-2">{product.prodSelling}</td>
+                  <td className="border rounded p-2">
+                    <button
+                      onClick={() => handleEditProduct(product.id)} // Define the edit action
+                      className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mr-2"
+                    >
+                      Edit
+                    </button>
+                    <button
+                      onClick={() => handleDeleteProduct(product.id)} // Define the delete action
+                      className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                    >
+                      Delete
+                    </button>
+                  </td>
                 </tr>
               ))}
             </tbody>

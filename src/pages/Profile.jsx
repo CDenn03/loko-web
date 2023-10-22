@@ -8,11 +8,11 @@ export default function Profile() {
     <div className="flex w-full">
       <Topbar />
       <Sidebar />
-      <div className="w-full">
-        <div className="pt-24 py-4 bg-yellow-50 w-full">
+      <div className="w-full bg-[#EAEDDB]">
+        <div className="pt-24 py-4  w-full">
           <span className="p-4 text-3xl">Profile</span>
         </div>
-        <div className="relative flex flex-col m-2">
+        <div className=" flex flex-col m-2">
           <div className="bg-gray-200 flex p-2 md:p-4 w-full">
             <form className="box-border flex flex-wrap w-full">
               <div className="flex p-2 md:p-3 w-full md:w-1/2 lg:w-1/3 justify-between shadow-slate-500 drop-shadow-lg">
