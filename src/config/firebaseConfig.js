@@ -1,11 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 
-//import firebase from "firebase/app";
-//import "firebase/firestore";
-
-// const firebaseConfig = require("./firebaseConfig.js");
-
 const config = {
   apiKey: "AIzaSyCbnYC2JqrRIIGRE7Rz1WCOIXOfHbMe76o",
   authDomain: "loko-202713.firebaseapp.com",

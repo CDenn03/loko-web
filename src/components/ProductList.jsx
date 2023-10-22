@@ -1,4 +1,3 @@
-// src/components/ProductList.js
 import React, { useEffect, useState } from "react";
 
 import { getDocs, where, orderBy, limit, query } from "firebase/firestore";
