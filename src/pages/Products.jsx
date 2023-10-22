@@ -1,9 +1,9 @@
+import { collection, getDocs, query, where } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
-import Topbar from "../components/Topbar";
 import Sidebar from "../components/Sidebar";
-import { db } from "../config/FirebaseConfig";
-import { collection, query, where, getDocs } from "firebase/firestore";
+import Topbar from "../components/Topbar";
 import ModalAddProduct from "../components/modal/ModalAddProduct";
+import { db } from "../config/FirebaseConfig";
 import { useData } from "../context/DataProvider";
 
 const ProductList = () => {
