@@ -1,7 +1,6 @@
 import React from "react";
 import Sidebar from "../components/Sidebar";
 import Topbar from "../components/Topbar";
-import { useData } from "../context/DataProvider";
 
 export default function Profile() {
   return (
