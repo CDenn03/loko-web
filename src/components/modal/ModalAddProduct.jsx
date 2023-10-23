@@ -20,45 +20,45 @@ const ModalAddProduct = ({
   });
   const { id, shopName } = useData();
 
-  const checkDuplicate = async (name, id) => {
-    const productsRef = collection(db, "Products");
-    const que = query(
-      productsRef,
-      where("name", "==", name),
-      where("shopId", "==", id)
-    );
+  // const checkDuplicate = async (shopName, id) => {
+  //   const productsRef = collection(db, "Products");
+  //   const que = query(
+  //     productsRef,
+  //     where("name", "==", shopName),
+  //     where("shopId", "==", id)
+  //   );
 
-    const querySnapshot = await getDocs(que);
+  //   const querySnapshot = await getDocs(que);
 
-    if (querySnapshot.size === 0) {
-      return false;
-    } else {
-      toast.error("Name already exists.", {
-        position: toast.POSITION.TOP_CENTER,
-      });
-      return true;
-    }
-  };
+  //   if (querySnapshot.size === 0) {
+  //     return false;
+  //   } else {
+  //     toast.error("Name already exists.", {
+  //       position: toast.POSITION.TOP_CENTER,
+  //     });
+  //     return true;
+  //   }
+  // };
 
-  const handleAddProduct = async () => {
-    if (await checkDuplicate(productData.name, id)) {
-      return; // Don't proceed if there's a duplicate
-    }
+  // const handleAddProduct = async () => {
+  //   if (await checkDuplicate(productData.name, id)) {
+  //     return; // Don't proceed if there's a duplicate
+  //   }
 
-    try {
-      const productsRef = collection(db, "Products");
-      await addDoc(productsRef, {
-        ...productData, // Include the product data from the state
-        shopId: id, // Include the shopId
-        shopName: shopName, // Include the shopName
-      });
+  //   try {
+  //     const productsRef = collection(db, "Products");
+  //     await addDoc(productsRef, {
+  //       ...productData, // Include the product data from the state
+  //       shopId: id, // Include the shopId
+  //       shopName: shopName, // Include the shopName
+  //     });
 
-      setshowModalAddProducts(false);
-      getProducts();
-    } catch (error) {
-      console.error("Error adding product to Firestore:", error);
-    }
-  };
+  //     setshowModalAddProducts(false);
+  //     getProducts();
+  //   } catch (error) {
+  //     console.error("Error adding product to Firestore:", error);
+  //   }
+  // };
 
   return (
     <div className="">
@@ -184,7 +184,6 @@ const ModalAddProduct = ({
 
               <button
                 type="button"
-                onClick={handleAddProduct}
                 className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
               >
                 Add
