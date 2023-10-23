@@ -87,7 +87,9 @@ export default function VerifyOtp() {
                 <div className="flex justify-between mt-5 p-2">
                   <button
                     className=" bg-[#d7b244] container text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-auto ease-linear transition-all duration-150"
-                    onClick={verify}
+                    onClick={() => {
+                      navigate("/");
+                    }}
                   >
                     <span>Verify OTP</span>
                   </button>
