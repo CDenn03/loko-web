@@ -44,10 +44,12 @@ export default function VerifyOtp() {
       if (response) {
         navigate("/");
         console.log(id);
+        console.log("Response");
       }
     } catch (error) {
       console.log("Error: " + error);
     }
+    navigate("/");
   };
 
   const resend = async (e) => {
