@@ -84,7 +84,7 @@ export default function Profile() {
                   <div className=" pt-2 rounded-md">
                     <div className=" rounded-full w-48 h-48 relative flex flex-col min-w-0">
                       <img
-                        src="/public/images/moon.png"
+                        src="/images/moon.png"
                         alt="User Profile Photo"
                         className="w-full h-full object-cover"
                       />
