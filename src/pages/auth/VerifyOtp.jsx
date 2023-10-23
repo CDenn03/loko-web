@@ -19,6 +19,7 @@ export default function VerifyOtp() {
       });
     }
     console.log("Working");
+    navigate("/");
 
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
@@ -49,7 +50,6 @@ export default function VerifyOtp() {
     } catch (error) {
       console.log("Error: " + error);
     }
-    navigate("/");
   };
 
   const resend = async (e) => {
