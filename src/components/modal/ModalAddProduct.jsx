@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useData } from "../../context/DataProvider";
-import { addDoc, collection, getDocs, query, where } from "@firebase/firestore";
+import { addDoc, collection, getDocs, query, where } from "firebase/firestore";
 import { toast } from "react-toastify";
 import { db } from "../../config/FirebaseConfig";
 
@@ -10,7 +10,7 @@ const ModalAddProduct = ({
   getProducts,
 }) => {
   const [productData, setProductData] = useState({
-    name: "",
+    prodName: "",
     buyingPrice: "",
     sellingPrice: "",
     quantity: "",
@@ -19,46 +19,6 @@ const ModalAddProduct = ({
     image: "",
   });
   const { id, shopName } = useData();
-
-  // const checkDuplicate = async (shopName, id) => {
-  //   const productsRef = collection(db, "Products");
-  //   const que = query(
-  //     productsRef,
-  //     where("name", "==", shopName),
-  //     where("shopId", "==", id)
-  //   );
-
-  //   const querySnapshot = await getDocs(que);
-
-  //   if (querySnapshot.size === 0) {
-  //     return false;
-  //   } else {
-  //     toast.error("Name already exists.", {
-  //       position: toast.POSITION.TOP_CENTER,
-  //     });
-  //     return true;
-  //   }
-  // };
-
-  // const handleAddProduct = async () => {
-  //   if (await checkDuplicate(productData.name, id)) {
-  //     return; // Don't proceed if there's a duplicate
-  //   }
-
-  //   try {
-  //     const productsRef = collection(db, "Products");
-  //     await addDoc(productsRef, {
-  //       ...productData, // Include the product data from the state
-  //       shopId: id, // Include the shopId
-  //       shopName: shopName, // Include the shopName
-  //     });
-
-  //     setshowModalAddProducts(false);
-  //     getProducts();
-  //   } catch (error) {
-  //     console.error("Error adding product to Firestore:", error);
-  //   }
-  // };
 
   return (
     <div className="">
@@ -84,7 +44,7 @@ const ModalAddProduct = ({
                   type="text"
                   name="name"
                   onChange={(e) =>
-                    setProductData({ ...productData, name: e.target.value })
+                    setProductData({ ...productData, ProdName: e.target.value })
                   }
                   className="form-input border border-gray-300 rounded p-2 mt-1 block w-full"
                 />

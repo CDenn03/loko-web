@@ -46,10 +46,14 @@ export default function VerifyOtp() {
         navigate("/");
         console.log(id);
         console.log("Response");
+        console.log(response);
+
+        localStorage.setItem("userId", id);
       }
     } catch (error) {
       console.log("Error: " + error);
     }
+    localStorage.setItem("userId", id);
   };
 
   const resend = async (e) => {
@@ -88,7 +92,7 @@ export default function VerifyOtp() {
                   <button
                     className=" bg-[#d7b244] container text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-auto ease-linear transition-all duration-150"
                     onClick={() => {
-                      navigate("/");
+                      verify;
                     }}
                   >
                     <span>Verify OTP</span>

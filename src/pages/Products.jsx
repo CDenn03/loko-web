@@ -1,4 +1,4 @@
-import { collection, getDocs, query, where } from "firebase/firestore";
+import { collection, getDocs, query, where } from "@firebase/firestore";
 import React, { useEffect, useState } from "react";
 import Sidebar from "../components/Sidebar";
 import Topbar from "../components/Topbar";
@@ -18,14 +18,18 @@ const ProductList = () => {
     const q = query(productsRef, where("shop_id", "==", id));
 
     const querySnapshot = await getDocs(q);
-
+    console.log(querySnapshot);
     const productsData = querySnapshot.docs.map((doc) => ({
       id: doc.id,
       ...doc.data(),
     }));
 
     setProducts(productsData);
+    console.log(id);
+    console.log("gap");
     console.log(products);
+    console.log("gap 2");
+    console.log(productsData);
   }
 
   useEffect(() => {
@@ -61,58 +65,44 @@ const ProductList = () => {
                 <th>Action</th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                <td className=" p-1 w-1/5">
-                  <div className="border rounded-lg">One</div>
-                </td>
-                <td className=" p-1 w-1/5">
-                  <div className="border rounded-lg">Two</div>
-                </td>
-                <td className=" p-1 w-1/5">
-                  <div className="border rounded-lg">Three</div>
-                </td>
-                <td className=" p-1 w-1/5">
-                  <div className="border rounded-lg">Four</div>
-                </td>
-                <td className=" p-1 w-1/5">
-                  <div className="flex px-10 justify-center ">
-                    <button
-                      onClick={() => handleEditProduct(product.id)} // Define the edit action
-                      className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mr-2"
-                    >
-                      Edit
-                    </button>
-                    <button
-                      onClick={() => handleDeleteProduct(product.id)} // Define the delete action
-                      className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
-                    >
-                      Delete
-                    </button>
-                  </div>
-                </td>
-                <hr className="m-4 border-b-1 border-green-900  " />
-              </tr>
-
-              {products.map((product) => (
+            <tbody className="">
+              {products?.map((product) => (
                 <tr key={product.id}>
-                  <td className="border rounded p-2">{product.name}</td>
-                  <td className="border rounded p-2">{product.prodStock}</td>
-                  <td className="border rounded p-2">{product.prodBuying}</td>
-                  <td className="border rounded p-2">{product.prodSelling}</td>
-                  <td className="border rounded p-2">
-                    <button
-                      onClick={() => handleEditProduct(product.id)} // Define the edit action
-                      className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mr-2"
-                    >
-                      Edit
-                    </button>
-                    <button
-                      onClick={() => handleDeleteProduct(product.id)} // Define the delete action
-                      className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
-                    >
-                      Delete
-                    </button>
+                  <td className=" w-1/5  ">
+                    <div className="border border-white rounded-lg p-2 ">
+                      {product.prodName}
+                    </div>
+                  </td>
+                  <td className="w-1/5">
+                    <div className="border border-white rounded-lg p-2">
+                      {product.prodStock}
+                    </div>
+                  </td>
+                  <td className="w-1/5">
+                    <div className="border border-white rounded-lg p-2">
+                      {product.prodBuying}
+                    </div>
+                  </td>
+                  <td className="w-1/5 ">
+                    <div className="border border-white rounded-lg p-2">
+                      {product.prodSelling}
+                    </div>
+                  </td>
+                  <td className="w-1/5">
+                    <div className="flex px-10 justify-center p-2 ">
+                      <button
+                        onClick={() => handleEditProduct(product.id)} // Define the edit action
+                        className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mr-2"
+                      >
+                        Edit
+                      </button>
+                      <button
+                        onClick={() => handleDeleteProduct(product.id)} // Define the delete action
+                        className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                      >
+                        Delete
+                      </button>
+                    </div>
                   </td>
                 </tr>
               ))}
@@ -123,7 +113,6 @@ const ProductList = () => {
       <ModalAddProduct
         showModalAddProducts={showModalAddProducts}
         setshowModalAddProducts={setshowModalAddProducts}
-        getProducts={getProducts}
       />
     </div>
   );
