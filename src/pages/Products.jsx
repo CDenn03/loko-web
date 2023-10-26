@@ -1,16 +1,23 @@
-import { collection, getDocs, query, where } from "@firebase/firestore";
 import React, { useEffect, useState } from "react";
 import Sidebar from "../components/Sidebar";
 import Topbar from "../components/Topbar";
 import ModalAddProduct from "../components/modal/ModalAddProduct";
 import { db } from "../config/FirebaseConfig";
 import { useData } from "../context/DataProvider";
+import {
+  collection,
+  getDocs,
+  query,
+  where,
+  updateDoc,
+  doc,
+} from "@firebase/firestore";
 
 const ProductList = () => {
   const { id } = useData();
 
   const [products, setProducts] = useState([]);
-
+  const [editingProduct, setEditingProduct] = useState(null); // Track the product being edited
   const [showModalAddProducts, setshowModalAddProducts] = useState(false);
 
   async function getProducts() {
@@ -18,19 +25,30 @@ const ProductList = () => {
     const q = query(productsRef, where("shop_id", "==", id));
 
     const querySnapshot = await getDocs(q);
-    console.log(querySnapshot);
     const productsData = querySnapshot.docs.map((doc) => ({
       id: doc.id,
       ...doc.data(),
     }));
 
     setProducts(productsData);
-    console.log(id);
-    console.log("gap");
     console.log(products);
-    console.log("gap 2");
-    console.log(productsData);
   }
+
+  const handleEditProduct = (productId) => {
+    setEditingProduct(productId);
+  };
+
+  const handleSaveProduct = async (productId, updatedData) => {
+    const productDocRef = doc(db, "Products", productId);
+
+    try {
+      await updateDoc(productDocRef, updatedData);
+      setEditingProduct(null); // Exit edit mode after saving
+      getProducts(); // Refresh the product list after saving
+    } catch (error) {
+      console.error("Error updating product:", error);
+    }
+  };
 
   useEffect(() => {
     getProducts();
@@ -40,7 +58,7 @@ const ProductList = () => {
     <div className="flex w-full">
       <Topbar />
       <Sidebar />
-      <div className=" bg-slate-100 w-screen">
+      <div className="bg-slate-100 w-screen">
         <div className="pt-24 py-4">
           <span className="p-4 font-bold text-3xl">Products List</span>
           <div className="text-right pr-4">
@@ -65,44 +83,91 @@ const ProductList = () => {
                 <th>Action</th>
               </tr>
             </thead>
-            <tbody className="">
+            <tbody>
               {products?.map((product) => (
                 <tr key={product.id}>
-                  <td className=" w-1/5  ">
-                    <div className="border border-white rounded-lg p-2 ">
-                      {product.prodName}
-                    </div>
+                  <td className="w-1/5">
+                    {editingProduct === product.id ? ( // Check if the product is being edited
+                      <input
+                        type="text"
+                        value={product.name}
+                        onChange={(e) =>
+                          handleSaveProduct(product.id, {
+                            prodName: e.target.value,
+                          })
+                        }
+                      />
+                    ) : (
+                      product.name
+                    )}
                   </td>
                   <td className="w-1/5">
-                    <div className="border border-white rounded-lg p-2">
-                      {product.prodStock}
-                    </div>
+                    {editingProduct === product.id ? (
+                      <input
+                        type="text"
+                        value={product.prodStock}
+                        onChange={(e) =>
+                          handleSaveProduct(product.id, {
+                            prodStock: e.target.value,
+                          })
+                        }
+                      />
+                    ) : (
+                      product.prodStock
+                    )}
                   </td>
                   <td className="w-1/5">
-                    <div className="border border-white rounded-lg p-2">
-                      {product.prodBuying}
-                    </div>
-                  </td>
-                  <td className="w-1/5 ">
-                    <div className="border border-white rounded-lg p-2">
-                      {product.prodSelling}
-                    </div>
+                    {editingProduct === product.id ? (
+                      <input
+                        type="text"
+                        value={product.prodBuying}
+                        onChange={(e) =>
+                          handleSaveProduct(product.id, {
+                            prodBuying: e.target.value,
+                          })
+                        }
+                      />
+                    ) : (
+                      product.prodBuying
+                    )}
                   </td>
                   <td className="w-1/5">
-                    <div className="flex px-10 justify-center p-2 ">
+                    {editingProduct === product.id ? (
+                      <input
+                        type="text"
+                        value={product.prodSelling}
+                        onChange={(e) =>
+                          handleSaveProduct(product.id, {
+                            prodSelling: e.target.value,
+                          })
+                        }
+                      />
+                    ) : (
+                      product.prodSelling
+                    )}
+                  </td>
+                  <td className="w-1/5">
+                    {editingProduct === product.id ? (
                       <button
-                        onClick={() => handleEditProduct(product.id)} // Define the edit action
+                        onClick={() => handleSaveProduct(product.id, product)} // Save changes
+                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2"
+                      >
+                        Save
+                      </button>
+                    ) : (
+                      <button
+                        onClick={() => handleEditProduct(product.id)} // Enter edit mode
                         className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mr-2"
                       >
                         Edit
                       </button>
-                      <button
-                        onClick={() => handleDeleteProduct(product.id)} // Define the delete action
-                        className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
-                      >
-                        Delete
-                      </button>
-                    </div>
+                    )}
+                    <button
+                      onClick={() => handleDeleteProduct(product.id)}
+                      className="bg-red-500 hover-bg-red-700 text-white font-bold py-2 px-4 rounded"
+                    >
+                      Delete
+                    </button>
                   </td>
                 </tr>
               ))}

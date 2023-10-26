@@ -35,6 +35,7 @@ export default function VerifyOtp() {
       body: raw,
       redirect: "follow",
     };
+    console.log(raw);
 
     try {
       const response = await fetch(

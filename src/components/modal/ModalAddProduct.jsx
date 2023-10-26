@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useData } from "../../context/DataProvider";
-import { addDoc, collection, getDocs, query, where } from "firebase/firestore";
+import { addDoc, collection } from "firebase/firestore";
 import { toast } from "react-toastify";
 import { db } from "../../config/FirebaseConfig";
 
@@ -20,8 +20,51 @@ const ModalAddProduct = ({
   });
   const { id, shopName } = useData();
 
+  const handleAddProduct = async () => {
+    try {
+      const productsCollection = collection(db, "Products");
+
+      const newProduct = {
+        prodName: productData.prodName,
+        buyingPrice: productData.buyingPrice,
+        sellingPrice: productData.sellingPrice,
+        quantity: productData.quantity,
+        category: productData.category,
+        description: productData.description,
+        image: productData.image,
+        shop_id: id,
+      };
+
+      await addDoc(productsCollection, newProduct);
+
+      // Clear the form fields
+      setProductData({
+        prodName: "",
+        buyingPrice: "",
+        sellingPrice: "",
+        quantity: "",
+        category: "",
+        description: "",
+        image: "",
+      });
+
+      // Close the modal
+      setshowModalAddProducts(false);
+
+      // Refresh the product list by calling the getProducts function
+      getProducts();
+
+      // Show a success message using toast
+      toast.success("Product added successfully");
+    } catch (error) {
+      console.error("Error adding product:", error);
+      // Show an error message using toast
+      toast.error("Error adding product");
+    }
+  };
+
   return (
-    <div className="">
+    <div>
       {showModalAddProducts ? (
         <div className="fixed inset-0 flex items-center justify-center z-50 h-screen">
           <div className="modal-bg fixed inset-0 bg-black opacity-50"></div>
@@ -44,7 +87,7 @@ const ModalAddProduct = ({
                   type="text"
                   name="name"
                   onChange={(e) =>
-                    setProductData({ ...productData, ProdName: e.target.value })
+                    setProductData({ ...productData, prodName: e.target.value })
                   }
                   className="form-input border border-gray-300 rounded p-2 mt-1 block w-full"
                 />
@@ -145,6 +188,7 @@ const ModalAddProduct = ({
               <button
                 type="button"
                 className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                onClick={handleAddProduct}
               >
                 Add
               </button>

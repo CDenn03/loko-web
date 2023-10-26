@@ -23,33 +23,42 @@ export default function Profile() {
     deliveryContact: "",
   });
 
+  const [profile, setProfile] = useState([]);
+
   const { id } = useData();
 
-  useEffect(() => {
+  async function getProfile() {
+    const shopsRef = collection(db, "Shops");
+    const q = query(shopsRef, where("shop_id", "==", id));
+
+    const querySnapshot = await getDocs(q);
+    console.log(querySnapshot);
+
+    const shopsData = querySnapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
+    setProfile(shopsData);
+  }
+
+  const handleSave = () => {
     const shopCollection = firebase.firestore().collection("shop");
 
-    const shopsRef = collection(db, "Products");
-    const q = query(productsRef, where("shop_id", "==", id));
-
-    try {
-    } catch {}
-
     const shopId = id;
-    // Fetch the user data based on the user ID
+    // Update the Firestore document with the modified shopProfile
     shopCollection
       .doc(shopId)
-      .get()
-      .then((doc) => {
-        if (doc.exists) {
-          // Data found, set it in the state
-          setShopProfile(doc.data());
-        } else {
-          console.log("Shop not found in Firestore");
-        }
+      .update(shopProfile)
+      .then(() => {
+        console.log("Document successfully updated!");
       })
       .catch((error) => {
-        console.error("Error getting user data:", error);
+        console.error("Error updating document:", error);
       });
+  };
+
+  useEffect(() => {
+    getProfile();
   }, []);
 
   // Define onChange handlers for each input field
@@ -166,6 +175,14 @@ export default function Profile() {
                       />
                     </div>
                   </div>
+                </div>
+                <div className="p-2 md:p-3 w-full md:w-1/2 lg:w-1/3">
+                  <button
+                    onClick={handleSave} // Call the handleSave function when clicked
+                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md"
+                  >
+                    Save
+                  </button>
                 </div>
               </div>
             </form>
