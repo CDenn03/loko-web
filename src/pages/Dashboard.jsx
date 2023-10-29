@@ -4,6 +4,7 @@ import Sidebar from "../components/Sidebar";
 import Topbar from "../components/Topbar";
 
 export default function Dashboard() {
+  const id = localStorage.getItem("userId");
   return (
     <>
       <div className="flex w-full">

@@ -17,12 +17,13 @@ import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
 
 const ProductList = () => {
+  const id = localStorage.getItem("userId");
+
   const shopID = localStorage.getItem("userId");
 
   const [products, setProducts] = useState([]);
   const [editingProduct, setEditingProduct] = useState(null);
   const [showModalAddProducts, setshowModalAddProducts] = useState(false);
-  const [isSaving, setIsSaving] = useState(false); // New state variable
 
   async function getProducts() {
     const productsRef = collection(db, "Products");
@@ -42,12 +43,14 @@ const ProductList = () => {
   };
 
   const handleDeleteProduct = async (productId) => {
-    try {
-      const productDocRef = doc(db, "Products", productId);
-      await deleteDoc(productDocRef);
-      getProducts();
-    } catch (error) {
-      console.error("Error deleting product:", error);
+    if (window.confirm("Are you sure you want to delete this product?")) {
+      try {
+        const productDocRef = doc(db, "Products", productId);
+        await deleteDoc(productDocRef);
+        getProducts();
+      } catch (error) {
+        console.error("Error deleting product:", error);
+      }
     }
   };
 
@@ -69,49 +72,15 @@ const ProductList = () => {
   };
 
   const handleSaveProduct = async (productId, updatedData) => {
-    if (!isSaving) {
-      setIsSaving(true); // Set saving state to true
+    const productDocRef = doc(db, "Products", productId);
 
-      const productDocRef = doc(db, "Products", productId);
-
-      try {
-        await updateDoc(productDocRef, updatedData);
-        setEditingProduct(null);
-        getProducts();
-      } catch (error) {
-        console.error("Error updating product:", error);
-      }
-
-      setIsSaving(false); // Reset saving state after saving
+    try {
+      await updateDoc(productDocRef, updatedData);
+      setEditingProduct(null);
+      getProducts();
+    } catch (error) {
+      console.error("Error updating product:", error);
     }
-  };
-
-  const handleNameChange = (productId, newName) => {
-    const updatedData = {
-      name: newName,
-    };
-    // handleSaveProduct(productId, updatedData);
-  };
-
-  const handleQuantityChange = (productId, newQuantity) => {
-    const updatedData = {
-      quantity: newQuantity,
-    };
-    handleSaveProduct(productId, updatedData);
-  };
-
-  const handleBuyingPriceChange = (productId, newBuyingPrice) => {
-    const updatedData = {
-      buyingPrice: newBuyingPrice,
-    };
-    handleSaveProduct(productId, updatedData);
-  };
-
-  const handleSellingPriceChange = (productId, newSellingPrice) => {
-    const updatedData = {
-      sellingPrice: newSellingPrice,
-    };
-    handleSaveProduct(productId, updatedData);
   };
 
   useEffect(() => {
@@ -123,9 +92,9 @@ const ProductList = () => {
       <Topbar />
       <Sidebar />
       <div className="bg-slate-100 w-screen">
-        <div className="pt-24 py-4 flex justify-between">
+        <div className="pt-24 py-4">
           <span className="p-4 font-bold text-3xl">Products List</span>
-          <div className="text-right pr-4 flex items-center justify-center">
+          <div className="text-right pr-4">
             <button
               onClick={() => setshowModalAddProducts(true)}
               className="bg-amber-600 hover:bg-amber-700 text-white font-bold py-2 px-4 rounded"
@@ -155,10 +124,13 @@ const ProductList = () => {
                       {editingProduct === product.id ? (
                         <input
                           type="text"
-                          defaultValue={product.name || ""}
-                          onChange={(e) =>
-                            handleNameChange(product.id, e.target.value)
-                          }
+                          value={product.name || ""}
+                          onChange={(e) => {
+                            const updatedProduct = {
+                              ...product,
+                              name: e.target.value,
+                            };
+                          }}
                         />
                       ) : (
                         <span>{product.name}</span>
@@ -170,10 +142,11 @@ const ProductList = () => {
                       {editingProduct === product.id ? (
                         <input
                           type="text"
-                          defaultValue={product.quantity || ""}
-                          onChange={(e) =>
-                            handleQuantityChange(product.id, e.target.value)
-                          }
+                          value={product.quantity}
+                          onChange={(e) => {
+                            e.preventDefault();
+                            setEmail(e.target.value);
+                          }}
                         />
                       ) : (
                         <span>{product.quantity}</span>
@@ -185,10 +158,11 @@ const ProductList = () => {
                       {editingProduct === product.id ? (
                         <input
                           type="text"
-                          defaultValue={product.buyingPrice || ""}
-                          onChange={(e) =>
-                            handleBuyingPriceChange(product.id, e.target.value)
-                          }
+                          value={product.buyingPrice}
+                          onChange={(e) => {
+                            e.preventDefault();
+                            setEmail(e.target.value);
+                          }}
                         />
                       ) : (
                         <span>{product.buyingPrice}</span>
@@ -200,10 +174,11 @@ const ProductList = () => {
                       {editingProduct === product.id ? (
                         <input
                           type="text"
-                          defaultValue={product.sellingPrice || ""}
-                          onBlur={(e) =>
-                            handleSellingPriceChange(product.id, e.target.value)
-                          }
+                          value={product.sellingPrice}
+                          onChange={(e) => {
+                            e.preventDefault();
+                            setEmail(e.target.value);
+                          }}
                         />
                       ) : (
                         <span>{product.sellingPrice}</span>

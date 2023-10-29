@@ -10,10 +10,9 @@ import {
 } from "firebase/firestore";
 
 import { db } from "../config/FirebaseConfig";
-import { useData } from "../../context/DataProvider";
 
 const ProductList = () => {
-  const { id } = useData();
+  const id = localStorage.getItem("userId");
 
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);

@@ -15,6 +15,7 @@
     "firebase": "^10.5.0",
     "jsonwebtoken": "^9.0.2",
     "react": "^18.2.0",
+    "react-confirm-alert": "^3.0.6",
     "react-dom": "^18.2.0",
     "react-firebase-hooks": "^5.1.1",
     "react-icons": "^4.11.0",

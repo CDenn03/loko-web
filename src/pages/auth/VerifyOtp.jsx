@@ -4,12 +4,14 @@ import { RiLockPasswordLine } from "react-icons/ri";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
-import { useData } from "../../context/DataProvider";
 
 export default function VerifyOtp() {
   const [otp, setOtp] = useState("");
   const navigate = useNavigate("");
-  const { id } = useData();
+  const [responseMessage, setResponseMessage] = useState("");
+
+  const [jwtToken, setJwtToken] = useState(null);
+  const id = localStorage.getItem("userId");
 
   const verify = async (e) => {
     e.preventDefault();
@@ -21,40 +23,61 @@ export default function VerifyOtp() {
     console.log("Working");
     navigate("/");
 
-    var myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
-
-    var raw = JSON.stringify({
-      shopId: id,
-      webOTP: otp,
-    });
-
-    var requestOptions = {
-      method: "POST",
-      headers: myHeaders,
-      body: raw,
-      redirect: "follow",
-    };
-    console.log(raw);
-
     try {
+      // Define the request payload
+      const data = {
+        shopId: id,
+        webOTP: otp,
+      };
+
+      // Make the POST request to the /verifyOTPWeb endpoint
       const response = await fetch(
         "https://us-central1-loko-202713.cloudfunctions.net/lokoWebLogin/verifyOTPWeb?apiKey=AIzaSyCu6L1wyt5YAbXYRarKjeszbTp5CQIiiDI",
-        requestOptions
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        }
       );
 
-      if (response) {
-        navigate("/");
-        console.log(id);
-        console.log("Response");
-        console.log(response);
-
-        localStorage.setItem("userId", id);
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
       }
+      const responseData = await response.json();
+
+      if (responseData.ERROR) {
+        // Handle error responses
+        if (responseData.ERROR === "Unauthorized") {
+          setResponseMessage("Error: Unauthorized");
+        } else if (responseData.ERROR === "Incorrect OTP Code.") {
+          setResponseMessage("Error: Incorrect OTP Code.");
+          toast.error("Incorrect OTP Code.");
+        } else if (responseData.ERROR === "OTP Code Does Not Exist.") {
+          setResponseMessage("Error: OTP Code does not exist.");
+        } else {
+          setResponseMessage("Error: Unknown error.");
+        }
+      } else if (responseData.SUCCESS) {
+        // Handle success responses
+        setResponseMessage("Success: " + responseData.SUCCESS);
+        toast.success("Successful verification");
+        //TODO: implement token
+        localStorage.setItem("jwtToken", token);
+        navigate("/");
+      } else {
+        // Handle unknown response format
+        setResponseMessage("Unknown response format");
+      }
+      console.log(responseMessage);
+      console.log("Response");
     } catch (error) {
-      console.log("Error: " + error);
+      // Handle network or other errors
+      setResponseMessage("Error: " + error.message);
     }
-    localStorage.setItem("userId", id);
+    localStorage.setItem("jwtToken", token);
+    navigate("/");
   };
 
   const resend = async (e) => {

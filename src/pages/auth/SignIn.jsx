@@ -4,7 +4,7 @@ import Topbar from "../../components/Topbar";
 import { AiOutlineMail, AiOutlineLock } from "react-icons/ai";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useData } from "../../context/DataProvider";
+
 // import jwt from "jsonwebtoken";
 import axios from "axios";
 
@@ -12,7 +12,6 @@ export default function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  const { setID } = useData();
 
   const login = async (e) => {
     e.preventDefault();
@@ -48,7 +47,8 @@ export default function SignIn() {
         if (result.SUCCESS) {
           console.log(result);
           const id = result.shopId;
-          setID(id);
+          localStorage.setItem("userId", id);
+          toast.success("Successful login");
           navigate("/verify");
         }
       } else if (response.status === 401) {
@@ -57,17 +57,16 @@ export default function SignIn() {
           // Unauthorized, show an error message
           console.log("Unauthorized");
         } else if (errorResult.ERROR === "Incorrect Password.") {
-          // Incorrect Password, show an error message
+          toast.error("Incorrect Password.");
           console.log("Incorrect Password.");
-        } else {
-          // Handle other 401 errors if needed
+        } else if (errorResult.ERROR === "Email Provided Does Not Exist.") {
+          console.log("Email Provided Does Not Exist.");
+          toast.error("Email Provided Does Not Exist.");
         }
       } else if (response.status === 500) {
         const errorResult = await response.json();
         // Internal Server Error, show an error message
         console.log("Internal Server Error: " + errorResult.ERROR);
-      } else {
-        // Handle other response statuses if needed
       }
     } catch (error) {
       // Handle network or other errors
