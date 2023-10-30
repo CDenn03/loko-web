@@ -11,7 +11,7 @@ import {
   updateDoc,
 } from "firebase/firestore";
 
-import { db } from "../config/FirebaseConfig";
+import { db } from "../config/dbConfig";
 
 export default function Profile() {
   const [shopProfile, setShopProfile] = useState({
