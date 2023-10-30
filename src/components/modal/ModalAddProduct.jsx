@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import { addDoc, collection, updateDoc } from "firebase/firestore";
 import { toast } from "react-toastify";
-import { db } from "../../config/FirebaseConfig";
+import { db } from "../../config/dbConfig";
 
 const ModalAddProduct = ({
   showModalAddProducts,

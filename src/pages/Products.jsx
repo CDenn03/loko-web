@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Sidebar from "../components/Sidebar";
 import Topbar from "../components/Topbar";
 import ModalAddProduct from "../components/modal/ModalAddProduct";
-import { db } from "../config/FirebaseConfig";
+import { db } from "../config/dbConfig";
 
 import {
   collection,
