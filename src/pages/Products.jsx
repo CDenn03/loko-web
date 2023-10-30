@@ -26,7 +26,11 @@ const ProductList = () => {
 
   async function getProducts() {
     const productsRef = collection(db, "Products");
-    const q = query(productsRef, where("shop_id", "==", shopID));
+    const q = query(
+      productsRef,
+      where("shop_id", "==", shopID),
+      orderBy("name")
+    );
 
     const querySnapshot = await getDocs(q);
     const productsData = querySnapshot.docs.map((doc) => ({

@@ -100,6 +100,7 @@ const ModalAddProduct = ({
                   onChange={(e) =>
                     setProductData({ ...productData, prodName: e.target.value })
                   }
+                  required
                   className="form-input border border-gray-300 rounded p-2 mt-1 block w-full"
                 />
               </div>
@@ -117,6 +118,7 @@ const ModalAddProduct = ({
                       buyingPrice: e.target.value,
                     })
                   }
+                  required
                   className="form-input border border-gray-300 rounded p-2 mt-1 block w-full"
                 />
               </div>
@@ -134,6 +136,7 @@ const ModalAddProduct = ({
                       sellingPrice: e.target.value,
                     })
                   }
+                  required
                   className="form-input border border-gray-300 rounded p-2 mt-1 block w-full"
                 />
               </div>
@@ -148,6 +151,7 @@ const ModalAddProduct = ({
                   onChange={(e) =>
                     setProductData({ ...productData, quantity: e.target.value })
                   }
+                  required
                   className="form-input border border-gray-300 rounded p-2 mt-1 block w-full"
                 />
               </div>
@@ -162,6 +166,7 @@ const ModalAddProduct = ({
                   onChange={(e) =>
                     setProductData({ ...productData, category: e.target.value })
                   }
+                  required
                   className="form-textarea border border-gray-300 rounded p-2 mt-1 block w-full"
                 />
               </div>
@@ -178,6 +183,7 @@ const ModalAddProduct = ({
                       description: e.target.value,
                     })
                   }
+                  required
                   className="form-input border border-gray-300 rounded p-2 mt-1 block w-full"
                 />
               </div>
