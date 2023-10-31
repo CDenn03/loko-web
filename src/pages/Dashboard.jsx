@@ -10,9 +10,9 @@ export default function Dashboard() {
       <div className="flex w-full">
         <Topbar />
         <Sidebar />
-        <div className="w-full  bg-[#EAEDDB] ">
+        <div className="w-full ml-[218px] bg-gray-100 h-screen">
           <div className="pt-24 py-4 w-full">
-            <span className="p-4 text-3xl">Dashboard</span>
+            <span className="p-4 font-bold text-3xl">Dashboard</span>
           </div>
           <div className="">
             <div className="flex flex-wrap gap-4 p-5">

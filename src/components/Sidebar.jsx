@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 export default function Sidebar() {
   return (
-    <nav className="pt-20 p-5 bg-slate-100 text-black h-screen ">
+    <nav className="pt-20 p-5 bg-slate-100 text-black h-screen z-10 fixed ">
       <ul className="flex-col justify-center flex gap-2">
         <span className="p-4 text-xl uppercase font-bold">Navigation</span>
         {/* start of components */}

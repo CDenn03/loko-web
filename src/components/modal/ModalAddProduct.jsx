@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { addDoc, collection, updateDoc } from "firebase/firestore";
 import { toast } from "react-toastify";
 import { db } from "../../config/dbConfig";
+import { BiSolidSave } from "react-icons/bi";
 
 const ModalAddProduct = ({
   showModalAddProducts,
@@ -77,9 +78,9 @@ const ModalAddProduct = ({
   return (
     <div>
       {showModalAddProducts ? (
-        <div className="fixed inset-0 flex items-center justify-center z-50 overflow-hidden">
+        <div className="fixed inset-0 flex items-center justify-center z-50 overflow-hidden h-fit">
           <div className="modal-bg fixed inset-0 bg-black opacity-50"></div>
-          <div className="modal relative bg-white p-4 rounded-lg shadow-lg max-w-screen-md mx-auto w-full h-full">
+          <div className="modal relative bg-white p-4 mt-3 rounded-lg shadow-lg w-1/3 mx-auto h-full">
             <span
               className="close absolute top-2 right-2 text-gray-500 cursor-pointer text-2xl"
               onClick={() => {
@@ -88,7 +89,7 @@ const ModalAddProduct = ({
             >
               &times;
             </span>
-            <h2 className="text-xl font-semibold mb-4">Add Product</h2>
+            <h2 className="text-xl font-semibold mb-2">Add Product</h2>
             <form className="overflow-y-auto">
               <div className="mb-4">
                 <label className="block text-sm font-medium text-gray-700">
@@ -101,7 +102,7 @@ const ModalAddProduct = ({
                     setProductData({ ...productData, prodName: e.target.value })
                   }
                   required
-                  className="form-input border border-gray-300 rounded p-2 mt-1 block w-full"
+                  className="form-input border border-gray-300 rounded p-1 mt-1 block w-full"
                 />
               </div>
 
@@ -119,7 +120,7 @@ const ModalAddProduct = ({
                     })
                   }
                   required
-                  className="form-input border border-gray-300 rounded p-2 mt-1 block w-full"
+                  className="form-input border border-gray-300 rounded p-1 mt-1 block w-full"
                 />
               </div>
 
@@ -137,7 +138,7 @@ const ModalAddProduct = ({
                     })
                   }
                   required
-                  className="form-input border border-gray-300 rounded p-2 mt-1 block w-full"
+                  className="form-input border border-gray-300 rounded p-1 mt-1 block w-full"
                 />
               </div>
 
@@ -152,7 +153,7 @@ const ModalAddProduct = ({
                     setProductData({ ...productData, quantity: e.target.value })
                   }
                   required
-                  className="form-input border border-gray-300 rounded p-2 mt-1 block w-full"
+                  className="form-input border border-gray-300 rounded p-1 mt-1 block w-full"
                 />
               </div>
 
@@ -167,7 +168,7 @@ const ModalAddProduct = ({
                     setProductData({ ...productData, category: e.target.value })
                   }
                   required
-                  className="form-textarea border border-gray-300 rounded p-2 mt-1 block w-full"
+                  className="form-textarea border border-gray-300 rounded p-1 mt-1 block w-full"
                 />
               </div>
 
@@ -184,10 +185,10 @@ const ModalAddProduct = ({
                     })
                   }
                   required
-                  className="form-input border border-gray-300 rounded p-2 mt-1 block w-full"
+                  className="form-input border border-gray-300 rounded p-1 mt-1 block w-full"
                 />
               </div>
-              <div className="flex justify-between ">
+              <div className="flex justify-between  items-center">
                 <div className="mb-4">
                   <label className="block text-sm font-medium text-gray-700">
                     Image
@@ -201,16 +202,19 @@ const ModalAddProduct = ({
                     className="form-input mt-1 block w-full"
                   />
                 </div>
-                <div className=" px-10 ">
+                <div className=" pl-2 ">
                   <button
                     type="button"
-                    className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mr-2"
+                    className="bg-[#e4bd47] hover:bg-[#ccab49] text-white font-bold py-1 px-4 rounded mr-2 "
                     onClick={(e) => {
                       e.preventDefault();
                       handleAddProduct();
                     }}
                   >
-                    Add
+                    <div className="flex justify-center items-center">
+                      <BiSolidSave />
+                      <span className="px-1 text-base ">Save</span>
+                    </div>
                   </button>
                 </div>
               </div>

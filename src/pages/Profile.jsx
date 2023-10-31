@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Sidebar from "../components/Sidebar";
 import Topbar from "../components/Topbar";
+import { BiSolidSave } from "react-icons/bi";
 
 import {
   getDocs,
@@ -184,7 +185,11 @@ export default function Profile() {
     <div className="flex w-full">
       <Topbar />
       <Sidebar />
-      <div className="bg-gray-100 w-full">
+      <div
+        className={`bg-gray-100 w-full ml-[218px] ${
+          showCurrentPasswordInput ? "h-full" : "h-screen"
+        }`}
+      >
         <div className="pt-[100px] ">
           <span className="p-6 font-bold text-3xl">Profile</span>
         </div>
@@ -273,12 +278,15 @@ export default function Profile() {
                       e.preventDefault();
                       handleSave();
                     }}
-                    className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mr-2"
+                    className="bg-[#e4bd47] hover:bg-[#ccab49] text-white font-bold py-1 px-4 rounded mr-2 "
                   >
-                    Save
+                    <div className="flex justify-center items-center">
+                      <BiSolidSave />
+                      <span className="px-1 text-base ">Save</span>
+                    </div>
                   </button>
                   <button
-                    className="bg-blue-500 hover-bg-blue-700 text-white font-bold py-2 px-4 rounded-md"
+                    className="bg-amber-600 hover:bg-amber-700 text-white font-bold py-2 px-4 rounded"
                     onClick={(e) => {
                       e.preventDefault();
                       setShowCurrentPasswordInput(!showCurrentPasswordInput);
@@ -294,7 +302,6 @@ export default function Profile() {
                         <label className=" mb-2">Current Password</label>
                         <input
                           type="password"
-                          value={currentPassword}
                           onChange={handleCurrentPasswordChange}
                           onBlur={verifyPassword}
                           className={`w-full border-1 p-2 rounded-md ${
@@ -309,7 +316,6 @@ export default function Profile() {
                         <label className=" mb-2">New Password</label>
                         <input
                           type="password"
-                          value={newPassword}
                           onChange={handleNewPasswordChange}
                           className="w-full border-1 p-2 border-gray-100 rounded-md shadow-slate-500 drop-shadow-lg"
                         />
@@ -319,7 +325,6 @@ export default function Profile() {
                         <label className=" mb-2">Confirm New Password</label>
                         <input
                           type="password"
-                          value={confirmNewPassword}
                           onChange={handleConfirmNewPasswordChange}
                           className="w-full border-1 p-2 border-gray-100 rounded-md shadow-slate-500 drop-shadow-lg"
                         />
@@ -330,9 +335,14 @@ export default function Profile() {
                         onClick={(e) => {
                           e.preventDefault();
                         }}
-                        className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mr-2"
+                        className="bg-[#e4bd47] hover:bg-[#ccab49] text-white font-bold py-1 px-4 rounded mr-2 "
                       >
-                        Update Password
+                        <div className="flex justify-center items-center">
+                          <BiSolidSave />
+                          <span className="px-1 text-base ">
+                            Update Password
+                          </span>
+                        </div>
                       </button>
                     </div>
                   </div>

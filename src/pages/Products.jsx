@@ -126,7 +126,7 @@ const ProductList = () => {
     <div className="flex w-full">
       <Topbar />
       <Sidebar />
-      <div className="bg-slate-100 w-screen">
+      <div className="ml-[218px] bg-slate-100 w-screen">
         <div className="pt-24 py-4 flex justify-between">
           <span className="p-4 font-bold text-3xl">Products List</span>
           <div className="text-right pr-4 flex items-center justify-center">
